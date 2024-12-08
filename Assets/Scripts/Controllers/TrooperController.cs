@@ -38,6 +38,11 @@ public class TrooperController : MonoBehaviour
 
     void Update()
     {
+        // If Troopers in Range:
+        // - Attack Enemies
+        // - Trade Allies
+        // - Tend Self
+
         if (isMoving)
         {
             MoveToTarget();
