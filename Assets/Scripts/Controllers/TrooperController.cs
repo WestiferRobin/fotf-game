@@ -1,11 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using FotF.Api.Enums;
+using FotF.Api.Enums.Units;
+using FotF.Api.Models.Troopers;
+using FotF.Api.Prisms;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class TrooperController : MonoBehaviour
 {
-    [Header("Trooper Movement")]
+
+    #region Trooper Config
+    public FactionType Faction { get; set; }
+    public TrooperClass Class { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    #endregion
+
     public float moveSpeed = 100f; // Speed of the trooper
     public Vector2 tileSize = new Vector2(1, 2); // Size of the trooper in grid cells
 
@@ -13,8 +24,14 @@ public class TrooperController : MonoBehaviour
     private Vector3 targetPosition; // Target position for movement
     private bool isMoving = false; // Flag to check if the trooper is moving
 
+    public Trooper Model;
+    public IPrism Prism => Model.Config.Agent;
+
+
     void Start()
     {
+        var config = new TrooperConfig(Faction, Class, FirstName, LastName);
+        Model = new Trooper(config);
         rb = GetComponent<Rigidbody2D>();
         targetPosition = transform.position; // Initialize target position
     }
