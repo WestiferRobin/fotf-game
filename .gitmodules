@@ -1,0 +1,3 @@
+[submodule "fotf-api"]
+	path = fotf-api
+	url = https://github.com/WestiferRobin/fotf-api.git
